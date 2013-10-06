@@ -1,0 +1,42 @@
+<!doctype html>
+<html ng-app=app>
+<head>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.1.1/angular.min.js"></script>
+<script src="../js/mask.js"></script>
+<script src="../js/keypress.js"></script>
+<script>
+
+function myController($scope) {
+  $scope.date = "12/34/5678";
+};
+
+function test($scope) {
+  $scope.test1= "It should work here...";
+  $scope.test2= "...and also here.";
+  $scope.callback = function fn($event) {
+    console.log("key pressed");
+};
+
+}
+var app = angular.module("app", ['ui.mask','ui.keypress']);
+app.controller("myController", myController);
+app.controller("test", test);
+
+</script>
+</head>
+<body ng-controller="test"  ui-keyup="{'enter':'callback($event)'}" >
+<div>
+  <hr>
+
+  <input type="text" ng-model="test1" />
+  <input type="text" ng-model="test2" />
+  
+  <div  ng-controller="myController">
+    <input type="text"
+    ng-model="date"
+    ui-mask="99/99/9999" />  
+
+  </div>
+</div>
+</body>
+</html>
